@@ -182,6 +182,14 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                 scrollTop: $(".ewok-buds-sides-container").offset().top
             }, 1e3)
         }
+		
+		function TTDS(elem){
+			if($('#TTDS').prop('checked')){
+			      localStorage.setItem("TTDS", "1");
+			   }else{
+				  localStorage.setItem("TTDS", "0");
+			   }
+		}
 
         function TTYT(e) {
             $(".container").append('<div id="TTmodal2" class="modal"><div class="TTmodal-content2"><span  class="TTclose2">&times;</span><div id="TTYoutubeWatch"></div></div></div></div>'), $(".TTclose2").on("click", function(e) {
@@ -364,15 +372,21 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                 }
                 return list;
             }
+			
+			
+		
 
             window.TTshorties = JSON.parse(localStorage.getItem('TTShorties'));
 
-            $('<div class="tickylinks"><small>Smart Codes:</b> Smart codes help you write dynamic and unique comments as well avoid comment repetion by grabbing information from the actual task. <span style="color:blue"><a href="https://www.tickytimer.com/shortcodes.php" target="_blank">Cheat Sheet</a></small> | <span style="color:blue"><a href="https://www.tickytimer.com/custom-shortcodes.php" target="_blank"><small>Custom Shortcodes</small></a></small></div>').insertAfter($('#ewok-buds-validation-comment'));
+
             $('#ewok-buds-validation-comment,textarea,input').on('keyup', function() {
+
+
+
                 var val = $(this).val();
                 var capital = true;
-                var val = val.trim();
-                if (val.indexOf('/') !== -1) {
+				var TTTDS = $('#TTDS').prop('checked')
+                if (val.indexOf('/') !== -1 && TTTDS == "0" && val.indexOf('http') == -1) {
                     var query = $('.ewok-task-query').eq(0).text();
                     if (query == "") {
                         query = $('.ewok-buds-query').eq(0).text();
@@ -488,11 +502,11 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                         val = capitalizeSentences(val);
                     }
                     val = val.charAt(0).toUpperCase() + val.slice(1);
-                    val = val.replace(/\s\s+/g, ' ');
                     $(this).val(val);
                 }
 
             });
+				
         }
 
         function TTsettings() {
@@ -501,7 +515,7 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                     rel: "stylesheet",
                     type: "text/css",
                     href: "https://www.tickytimer.com/css/m11.css"
-                }).appendTo("head"), $(".container").append('<div id="TTmodal" class="modal"><div class="TTmodal-content"><span class="TTclose">&times;</span><div style="width:100%"><div class="TTclose"></div><h4>When To Click</h4><p>Click the bookmarklet on the task page to get to the list of tasks per button (task mapper). Click it each task to start a timer. After a timer has started, click again if you want to scroll past the instructions. Click on any other page and it will open the page quality assistant for that domain.</p><h4>Recent Changes</h4><p><a target="_blank" href="https://www.tickytimer.com/custom-short-codes.php">Custom shortcodes</a> have been added. You may now make your own shortcodes for comments, and include <a target="_blank" href="https://www.tickytimer.com/shortcodes.php">smart codes</a> within your custom shortcodes. Block short codes now include half ticks. Short Codes should now be able to be run in all TextAreas (does not include text inputs). <br><br><b>Important Note:</b> <a target="blank" href="https://www.tickytimer.com/bookmarklets-info.php">I updated the link to the bookmarklet</a>. It\'s the same link, I just appeneded the timestamp to the link. This prevents the browser from caching the file so the latest updates become more automatic. It\'s not necessary to change this, but if you want updates to be quicker than it\'s a good idea.</p><h4>Known Issues</h4><p>Before sending data to TickyTimer, TickyTimer validates the page by checking the error list (located on the top of each task if submitted incorrectly). There are a few types of tasks that do not have this section (some headphone tasks and Youtube Search Suggestion Tasks). TickyTimer will submit the data, but will do so even if there were errors on the task for these particular tasks. When you submit again after fixing your errors you will see a TickyTimer has already submitted the task message. Be mindful that the time it took to correct the issues was not recorded and should be added to your timecard. This happens only on a small set of task types.</p><h4>Scroll Amount (Percentage) - CTRL + Up Arrow | CTRL + Down Arrow</h4><p>Enter a number beteen 1 and 100. If you enter 100 and click on go up, it will go up 100% of the window height. If you enter 50 and hit go down, you will scroll down 50% of the window height. You can technically put a number over 100. It will scroll more than the window height.</p><input style="width:100%" onchange="TTScrollAmt(this)" type="number"  value="100" id="TTScrollAmt"><h4>Custom Shortcodes Import - <a href="javascript:void(0)" onclick="localStorage.removeItem(\'TTShorties\'); alert(\'Deletion was a success. Please refresh or wait until next task for changes to take place.\');">Click Here to Clear All Custom ShortCodes</a></h4><p>To add custom shortcodes please follow the instuctions <a target="_blank" href="https://www.tickytimer.com/custom-short-codes.php">here</a>. To delete custom shortcodes hit the link above. To edit custom shortcodes, recreate a file using the instuctions on the custom shortcodes page.</p><input type="file" class="file-to-import"><h4>Green To Red Toolbar</h4><input onclick="TTGTR()" type="checkbox" id="TTGTR"><p>This setting changes the background color of the toolbar from green to red depending on how much time is left on the task. It starts off as green and gradually becomes red. </p><h4>Toolbar Color</h4><input onchange="colorMe()" style="margin-left:5px; margin-right:5px;" onchange="colorMe()"  type="color" id="TickyTimerColor"  value="#efefef" /> <h4>Links </h4><button style="margin-left:5px; margin-right:5px;" type="button" onClick="dashIt()">Dashboard</button><button style="margin-left:5px; margin-right:5px;" type="button" onClick="TTToggle();">Toggle Links</button><p>Notification sounds have been added to the bookmarklet. To mute sounds coming from TickyTimer.com, go to any page on tickytimer.com, right click the tab, and hit mute site.</p><h4>Notification Sound</h4><input id="TTSoundURL" onchange="TTChangeSound(this)" style="width:100%"><h4>Sound Notification Timer</h4><p>At what time left should the notification play? Enter time as m:ss. If you do not want notification sounds set this to 99:99. </p><input onchange="TTChangeSoundTracker(this)" id="TTSoundTracker" style="width:100%"><h4>Sound Exceptions</h4><p>Enter an amount of seconds in which the sound should not play. Ex entering 30 will prevent sound notifications on tasks that are 30 seconds or less.<input  onchange="TTChangeSoundException(this)" id="TTSoundException" style="width:100%"></p><p><a  target="blank" href="https://www.facebook.com/groups/2051461215176210/">RaterMate (Alternative Timer)</a></p><p><a  target="blank" href="http://ss13.moe/usrlocs/">Chris\'s Bookmarklet (Alternative Timer)</a></p></div></div></div>');
+                }).appendTo("head"), $(".container").append('<div id="TTmodal" class="modal"><div class="TTmodal-content"><span class="TTclose">&times;</span><div style="width:100%"><div class="TTclose"></div><h4>When To Click</h4><p>Click the bookmarklet on the task page to get to the list of tasks per button (task mapper). Click it each task to start a timer. After a timer has started, click again if you want to scroll past the instructions. Click on any other page and it will open the page quality assistant for that domain.</p><h4>Recent Changes</h4><p><a target="_blank" href="https://www.tickytimer.com/custom-short-codes.php">Custom shortcodes</a> have been added. You may now make your own shortcodes for comments, and include <a target="_blank" href="https://www.tickytimer.com/shortcodes.php">smart codes</a> within your custom shortcodes. Block short codes now include half ticks. Short Codes should now be able to be run in all TextAreas (does not include text inputs). <br><br><b>Important Note:</b> <a target="blank" href="https://www.tickytimer.com/bookmarklets-info.php">I updated the link to the bookmarklet</a>. It\'s the same link, I just appeneded the timestamp to the link. This prevents the browser from caching the file so the latest updates become more automatic. It\'s not necessary to change this, but if you want updates to be quicker than it\'s a good idea.</p><h4>Known Issues</h4><p>Before sending data to TickyTimer, TickyTimer validates the page by checking the error list (located on the top of each task if submitted incorrectly). There are a few types of tasks that do not have this section (some headphone tasks and Youtube Search Suggestion Tasks). TickyTimer will submit the data, but will do so even if there were errors on the task for these particular tasks. When you submit again after fixing your errors you will see a TickyTimer has already submitted the task message. Be mindful that the time it took to correct the issues was not recorded and should be added to your timecard. This happens only on a small set of task types.</p><h4>Scroll Amount (Percentage) - CTRL + Up Arrow | CTRL + Down Arrow</h4><p>Enter a number beteen 1 and 100. If you enter 100 and click on go up, it will go up 100% of the window height. If you enter 50 and hit go down, you will scroll down 50% of the window height. You can technically put a number over 100. It will scroll more than the window height.</p><input style="width:100%" onchange="TTScrollAmt(this)" type="number"  value="100" id="TTScrollAmt"><h4>Custom Shortcodes Import - <a href="javascript:void(0)" onclick="localStorage.removeItem(\'TTShorties\'); alert(\'Deletion was a success. Please refresh or wait until next task for changes to take place.\');">Click Here to Clear All Custom ShortCodes</a></h4><p>To add custom shortcodes please follow the instuctions <a target="_blank" href="https://www.tickytimer.com/custom-short-codes.php">here</a>. To delete custom shortcodes hit the link above. To edit custom shortcodes, recreate a file using the instuctions on the custom shortcodes page.</p><input type="file" class="file-to-import"><p><label><input id="TTDS" onclick="TTDS(this)" type="checkbox">Disable Shortcodes</label></p><h4>Green To Red Toolbar</h4><input onclick="TTGTR()" type="checkbox" id="TTGTR"><p>This setting changes the background color of the toolbar from green to red depending on how much time is left on the task. It starts off as green and gradually becomes red. </p><h4>Toolbar Color</h4><input onchange="colorMe()" style="margin-left:5px; margin-right:5px;" onchange="colorMe()"  type="color" id="TickyTimerColor"  value="#efefef" /> <h4>Links </h4><button style="margin-left:5px; margin-right:5px;" type="button" onClick="dashIt()">Dashboard</button><button style="margin-left:5px; margin-right:5px;" type="button" onClick="TTToggle();">Toggle Links</button><p>Notification sounds have been added to the bookmarklet. To mute sounds coming from TickyTimer.com, go to any page on tickytimer.com, right click the tab, and hit mute site.</p><h4>Notification Sound</h4><input id="TTSoundURL" onchange="TTChangeSound(this)" style="width:100%"><h4>Sound Notification Timer</h4><p>At what time left should the notification play? Enter time as m:ss. If you do not want notification sounds set this to 99:99. </p><input onchange="TTChangeSoundTracker(this)" id="TTSoundTracker" style="width:100%"><h4>Sound Exceptions</h4><p>Enter an amount of seconds in which the sound should not play. Ex entering 30 will prevent sound notifications on tasks that are 30 seconds or less.<input  onchange="TTChangeSoundException(this)" id="TTSoundException" style="width:100%"></p><p><a  target="blank" href="https://www.facebook.com/groups/2051461215176210/">RaterMate (Alternative Timer)</a></p><p><a  target="blank" href="http://ss13.moe/usrlocs/">Chris\'s Bookmarklet (Alternative Timer)</a></p></div></div></div>');
                 var t = document.getElementById("TTmodal"),
                     e = document.getElementById("TTModalbtn"),
                     o = document.getElementsByClassName("TTclose")[0];
@@ -513,6 +527,13 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                     e.target == t && (t.style.display = "none")
                 }
             }
+			
+			var TTDS =  localStorage.getItem("TTDS");
+			
+			if(TTDS == "1"){
+				$('#TTDS')[0].checked = true;			
+			}
+			
             if ("1" == localStorage.getItem("TTGTR") && $("#TTGTR").prop("checked", !0), null === localStorage.getItem("TTURL") || "" === localStorage.getItem("TTURL")) var i = "https://sfxcontent.s3.amazonaws.com/soundfx/CashRegister.mp3";
             else i = localStorage.getItem("TTURL");
             if ($("#TTSoundURL").val(i), window.TickySound = new Audio(i), null === localStorage.getItem("TTSoundTracker") || "" === localStorage.getItem("TTSoundTracker")) var a = "0:05";
@@ -567,10 +588,14 @@ if (-1 === TaskPage.indexOf("raterhub")) {
         }
 
         function handleAutos() {
-            if ($("#TickyTimerSASR").prop("checked")) {
-                $('#ewok-task-submit-done-button').click();
-            } else if ($("#TickyTimerAS").prop("checked")) {
-                $("#ewok-task-submit-button").click();
+         if ($("#TickyTimerAS").prop("checked")) {
+                var x = $('#ttaselect').val();
+				if(x == "1"){
+					$("#ewok-task-submit-button").click();
+				}else if(x == "2"){
+					$("#ewok-task-submit-done-button").focus().click();
+				}
+				
             }
         }
 
@@ -625,7 +650,7 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                     }
                 }
             }),
-            $("#ewok-submit-div").css("position", "fixed"), $("#ewok-submit-div").css("bottom", 0), $("#ewok-submit-div").css("background-color", "#efefef"), $(".clear:last").css("height", "100px"), $("#ewok-submit-div").css("z-index", 99), $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="TTgoDown()">&#9660;</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="TTgoUp()">&#9650;</button>').insertAfter("#ewok-task-submit-done-button"), $('<span style="font-size:15px; background-color:rgb(239, 239, 239); color:#222; padding:5px; margin-left:5px; margin-right:5px;" ><label style="margin-left:5px; margin-right:3px;"><small>Auto Submit</small> <input onClick="autoSubmitTask()"   type="checkbox" id="TickyTimerAS"/></label> <span id="TickyTimerSpan"></span></span>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" type="button" onClick="TTGuidelines()">Guidelines</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" type="button" onClick="tickyTimerRelease()">Release</button>').insertAfter("#ewok-task-submit-done-button"), $(".ewok-task-query:first").text(), "" !== $(".ewok-task-query:first").text() && $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="googleIt()">Google</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" id="TTModalbtn" type="button" onClick="TTsettings()">Settings</button>').insertAfter("#ewok-task-submit-done-button"), $("#ewok-submit-div").css("min-width", "0px"), $("#ewok-task-cancel-button").css("margin-left", "10px"), TTsettings();
+            $("#ewok-submit-div").css("position", "fixed"), $("#ewok-submit-div").css("bottom", 0), $("#ewok-submit-div").css("background-color", "#efefef"), $(".clear:last").css("height", "100px"), $("#ewok-submit-div").css("z-index", 99), $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="TTgoDown()">&#9660;</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="TTgoUp()">&#9650;</button>').insertAfter("#ewok-task-submit-done-button"), $('<span style="font-size:15px; background-color:rgb(239, 239, 239); color:#222; padding:5px; margin-left:5px; margin-right:5px;" ><label style="margin-left:5px; margin-right:3px;"><select id="ttaselect"><option value="1">Auto Submit</option><option value="2">Auto SASR</option></select><input onClick="autoSubmitTask()"   type="checkbox" id="TickyTimerAS"/></label> <span id="TickyTimerSpan"></span></span>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" type="button" onClick="TTGuidelines()">Guidelines</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" type="button" onClick="tickyTimerRelease()">Release</button>').insertAfter("#ewok-task-submit-done-button"), $(".ewok-task-query:first").text(), "" !== $(".ewok-task-query:first").text() && $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="googleIt()">Google</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" id="TTModalbtn" type="button" onClick="TTsettings()">Settings</button>').insertAfter("#ewok-task-submit-done-button"), $("#ewok-submit-div").css("min-width", "0px"), $("#ewok-task-cancel-button").css("margin-left", "10px"), TTsettings();
         var s = document.createElement("script");
         if (s.type = "text/javascript", s.src = "https://www.tickytimer.com/node_modules/hacktimer/HackTimer.min.js", $("head").append(s), null === localStorage.getItem("AS") && localStorage.setItem("AS", "No"), "Yes" === localStorage.getItem("AS") && $("#TickyTimerAS").prop("checked", !0), null === localStorage.getItem("color") && localStorage.setItem("color", "#efefef"), $("#TickyTimerColor").val(localStorage.getItem("color")), colorMe(), grapher(), $("body").on("keydown", function(e) {
                 if ($("#TickyTimerAS").prop("checked")) var t = !0;
