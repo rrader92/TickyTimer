@@ -1,4 +1,5 @@
 var TaskPage = location.href;
+
 if (-1 === TaskPage.indexOf("raterhub")) {
     var iframe = document.createElement("iframe");
     iframe.src = "https://www.tickytimer.com/domain-authority.php?website=" + TaskPage, iframe.style.width = "100%", iframe.style.height = "400px", document.body.prepend(iframe)
@@ -54,7 +55,7 @@ if (-1 === TaskPage.indexOf("raterhub")) {
             i = $(".button").length - 1,
             a = 0;
         for (a = 0; a <= i; a++) $("<span>" + o[a] + " </span>").insertAfter($(".button").eq(a))
-    }), $('<div style="margin-left:30px; margin-right:30px; margin-top:30px; font-size:15px; background-color:#2196F3; color:#FFFFFF; padding:15px; border-radius:50px;">Task Mapper Info: The button text (SxS and Exp) is based on the length of the url of the task. It can gauge whether a task is EXP or SXS and was provided by Scooter. The text besides the button are the headers of the previous task for that button. Neither are correct 100% of the time, but use both to make the best judgement. Scooters Extensions: <a style="color:#FFFFFF" href="https://chrome.google.com/webstore/detail/lfh/hhmlbldnlgbeckcfngbpjjalecpdmknk" target="_blank">LFH</a> | <a style="color:#FFFFFF"  href="https://chrome.google.com/webstore/detail/rating-examples/jhbidnpflpccdoffamdgpmgilfbpigdh" target="_blank">Rating Examples</a> </div><div style="margin-left:30px; margin-right:30px; margin-top:30px; font-size:15px; background-color:#ff6f00; color:#FFFFFF; padding:15px; border-radius:50px;">Resources: <a style="color:#FFFFFF" target="_blank" href="https://tickytimer.com/sxs-guide.php">SxS Tutorial</a> | <a style="color:#FFFFFF" target="_blank"  href="https://docs.google.com/document/d/1bqakRCOfSbaI__syoF_vk8VVgkhRZTGuEXjdXxQXX8I/edit#heading=h.5fg9s0covp0r">Unofficial Chat Dictionary</a> | <a style="color:#FFFFFF" target="_blank"  href="https://www.tickytimer.com/shortcodes.php">Comment Shortcodes</a> | <a style="color:#FFFFFF" target="_blank"  href="https://www.tickytimer.com/custom-short-codes.php">Custom Comment Shortcodes</a> | <a style="color:#FFFFFF" target="_blank"  href="https://github.com/rrader92/TickyTimer">Github Repository</a></div></div><div style="margin-left:30px; margin-right:30px; margin-top:30px; font-size:15px; background-color:#5cb85c; color:#FFFFFF; padding:15px; border-radius:50px;">Click here when there is NRT <a style="color:#FFFFFF" href="javascript:void(0)" onclick="TTRefresher()" >Refresher</a>. It will not refresh the page but instead open the page in an Iframe which is refreshed. It will chime when tasks are available. </div>').appendTo("body");
+    }), $('<div style="margin-left:30px; margin-right:30px; margin-top:30px; font-size:15px; background-color:#2196F3; color:#FFFFFF; padding:15px; border-radius:50px;"><b>Task Mapper</b> Info: The button text (SxS and Exp) is based on the length of the url of the task. It can gauge whether a task is EXP or SXS and was provided by Scooter. The text besides the button are the headers of the previous task for that button. Neither are correct 100% of the time, but use both to make the best judgement. Scooters Extensions: <a style="color:#FFFFFF" href="https://chrome.google.com/webstore/detail/lfh/hhmlbldnlgbeckcfngbpjjalecpdmknk" target="_blank">LFH</a> | <a style="color:#FFFFFF"  href="https://chrome.google.com/webstore/detail/rating-examples/jhbidnpflpccdoffamdgpmgilfbpigdh" target="_blank">Rating Examples</a> </div><div style="margin-left:30px; margin-right:30px; margin-top:30px; font-size:15px; background-color:#5cb85c; color:#FFFFFF; padding:15px; border-radius:50px;"><b>Resources</b>: <a style="color:#FFFFFF" target="_blank" href="https://tickytimer.com/chrome-extension.php">TickyTimer Approved Chrome Extension</a> | <a style="color:#FFFFFF" href="javascript:void(0)" onclick="TTRefresher()" >NRT Refresher</a> | <a style="color:#FFFFFF" target="_blank" href="https://tickytimer.com/sxs-guide.php">SxS Tutorial</a>  | <a style="color:#FFFFFF" target="_blank"  href="https://docs.google.com/document/d/1bqakRCOfSbaI__syoF_vk8VVgkhRZTGuEXjdXxQXX8I/edit#heading=h.5fg9s0covp0r">Unofficial Chat Dictionary</a> | <a style="color:#FFFFFF" target="_blank"  href="https://www.tickytimer.com/shortcodes.php">Comment Shortcodes</a> | <a style="color:#FFFFFF" href="https://chat.roguerater.net/channel/general" target="_blank">Rogue Chat</a></div><br><p style="margin-left:30px;"><b>Latest Updates (V5.2)</b></p></div>').appendTo("body");
     javascript: (function() {
         xList = document.getElementsByClassName("ewok-rater-task-option");
         for (i = 0; i < xList.length; i++) {
@@ -158,17 +159,22 @@ if (-1 === TaskPage.indexOf("raterhub")) {
         }
 
         function TTGTR() {
-            $("#TTGTR").prop("checked") && localStorage.setItem("TTGTR", "1")
+            if ($("#TTGTR").prop("checked")) {
+                localStorage.setItem("TTGTR", "1");
+            } else {
+                localStorage.setItem("TTGTR", "0");
+
+            }
         }
-		
-		function TTTab() {
-            if($("#TTTab").prop("checked")){
-				localStorage.setItem("TTTab", "1");
-			}else{
-				localStorage.setItem("TTTab", "0");
-				
-			}
-		}
+
+        function TTTab() {
+            if ($("#TTTab").prop("checked")) {
+                localStorage.setItem("TTTab", "1");
+            } else {
+                localStorage.setItem("TTTab", "0");
+
+            }
+        }
 
         function TTToggle() {
             0 == $(".tickylinks").length ? alert("Sorry no Ticky Timer Links were found (Open in Browser, Page Quality Assistant, or Watch Video)") : $(".tickylinks").eq(0).hasClass("TTnosee") ? $(".tickylinks,.divider").removeClass("TTnosee") : $(".tickylinks,.divider").addClass("TTnosee")
@@ -183,25 +189,30 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                 scrollTop: $(".ewok-buds-sides-container").offset().top
             }, 1e3)
         }
-		
-		function TTDS(elem){
-			if($('#TTDS').prop('checked')){
-			      localStorage.setItem("TTDS", "1");
-			   }else{
-				  localStorage.setItem("TTDS", "0");
-			   }
-		}
+
+        function TTDS1(elem) {
+            if ($('#TTDS1').prop('checked')) {
+                localStorage.setItem("TTDS1", "1");
+            } else {
+                localStorage.setItem("TTDS1", "0");
+            }
+        }
 
         function TTYT(e) {
             $(".container").append('<div id="TTmodal2" class="modal"><div class="TTmodal-content2"><span  class="TTclose2">&times;</span><div id="TTYoutubeWatch"></div></div></div></div>'), $(".TTclose2").on("click", function(e) {
                 $("#TTmodal2").remove(), $(".container").append('<div id="TTmodal2" class="modal"><div class="TTmodal-content2"><span  class="TTclose2">&times;</span><div id="TTYoutubeWatch"></div></div></div></div>'), TTYTClose()
-            }), $("#TTmodal2").css("display", "block"), $("#TTYoutubeWatch").html("<iframe style='width:100%; height:600px' src='https://www.tickytimer.com/youtube.php?v=" + e + "&bookmarklet'></iframe>")
+            }), $("#TTmodal2").css("display", "block"), $("#TTYoutubeWatch").html("<iframe style='width:100%; height:800px' src='https://www.tickytimer.com/youtube.php?v=" + e + "&bookmarklet'></iframe>")
         }
 
         function TTYTClose() {
             $(".TTclose2").on("click", function(e) {
                 $("#TTmodal2").remove(), $(".container").append('<div id="TTmodal2" class="modal"><div class="TTmodal-content2"><span  class="TTclose2">&times;</span><div id="TTYoutubeWatch"></div></div></div></div>')
             })
+        }
+
+        function TTSearchQueryOnYoutube() {
+            var url = 'https://www.youtube.com/results?search_query=' + $(".ewok-task-query:first").text();
+            window.open(url, '_blank');
         }
 
         function TTGetScrollP() {
@@ -266,15 +277,14 @@ if (-1 === TaskPage.indexOf("raterhub")) {
             localStorage.setItem("TTScrollAmt", t)
         }
 
-
-        //This section is for comment auocomplete		
-        if ($('h1').first().text() !== "Image" && "undefined" !== typeof $("input[name$='stars']") && "undefined" !== typeof $('#ewok-buds-validation-comment')) {
-            function jsUcfirst(string) {
-                if (string == "" || typeof string == "undefined") {
-                    string = "I cant find the information to perform this shortcode.";
-                }
-                return string.charAt(0).toUpperCase() + string.slice(1);
+        function jsUcfirst(string) {
+            if (string == "" || typeof string == "undefined") {
+                string = "I cant find the information to perform this shortcode.";
             }
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        if ("undefined" !== typeof $("input[name$='stars']") && $("input[name$='stars']").length > 0) {
 
             $("input[name$='stars']").on('change', function() {
                 window.TTLeftResults = new Array();
@@ -373,71 +383,71 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                 }
                 return list;
             }
-			
-			
-		
 
-            window.TTshorties = JSON.parse(localStorage.getItem('TTShorties'));
+        }
 
 
-            $('#ewok-buds-validation-comment,textarea,input').on('keyup', function() {
+        window.TTshorties = JSON.parse(localStorage.getItem('TTShorties'));
+
+
+        $('#ewok-buds-validation-comment,textarea,input').on('keyup', function() {
 
 
 
-                var val = $(this).val();
-                var capital = true;
-				var TTTDS = $('#TTDS').prop('checked')
-                if (val.indexOf('/') !== -1 && TTTDS == "0" && val.indexOf('http') == -1) {
-                    var query = $('.ewok-task-query').eq(0).text();
-                    if (query == "") {
-                        query = $('.ewok-buds-query').eq(0).text();
-                    }
-                    var side = $('[name=score]:checked').val();
-                    if (side == 'MuchBetterThan') {
-                        var side = 'the left side is much better than the right side';
-                    }
+            var val = $(this).val();
+            var capital = true;
+            var TTTDS1 = $('#TTDS1').prop('checked');
+            if (val.indexOf('/') !== -1 && TTTDS1 && val.indexOf('http') == -1) {
+                var query = $('.ewok-task-query').eq(0).text();
+                if (query == "") {
+                    query = $('.ewok-buds-query').eq(0).text();
+                }
+                var side = $('[name=score]:checked').val();
+                if (side == 'MuchBetterThan') {
+                    var side = 'the left side is much better than the right side';
+                }
 
-                    if (side == 'BetterThan') {
-                        var side = 'the left side is better than the right side';
-                    }
+                if (side == 'BetterThan') {
+                    var side = 'the left side is better than the right side';
+                }
 
-                    if (side == 'SlightlyBetterThan') {
-                        var side = 'the left side is slightly better than the right side';
-                    }
+                if (side == 'SlightlyBetterThan') {
+                    var side = 'the left side is slightly better than the right side';
+                }
 
-                    if (side == 'AboutTheSameAs') {
-                        var side = 'the left side is about the same as the right side';
-                    }
+                if (side == 'AboutTheSameAs') {
+                    var side = 'the left side is about the same as the right side';
+                }
 
-                    if (side == 'SlightlyWorseThan') {
-                        var side = 'the right side is slightly better than the left side';
-                    }
+                if (side == 'SlightlyWorseThan') {
+                    var side = 'the right side is slightly better than the left side';
+                }
 
-                    if (side == 'WorseThan') {
-                        var side = 'the right side is better than the left side';
-                    }
+                if (side == 'WorseThan') {
+                    var side = 'the right side is better than the left side';
+                }
 
-                    if (side == 'MuchWorseThan') {
-                        var side = 'the right side is much better than the left side';
-                    }
+                if (side == 'MuchWorseThan') {
+                    var side = 'the right side is much better than the left side';
+                }
 
-                    if (typeof side == "undefined") {
-                        'Select which side is better before using this shortcode.';
-                    }
+                if (typeof side == "undefined") {
+                    'Select which side is better before using this shortcode.';
+                }
 
-                    function TTrecursiveshort(recursive) {
-
-
-                        var userIntent = 'the user intent';
-                        var rightSide = 'the right side';
-                        var leftSide = 'the left side';
-                        var because = 'because';
-                        var therefore = 'therefore,';
-                        var leftEmpty = 'the left side is empty';
-                        var rightEmpty = 'the right side is empty';
-                        var user = 'the user';
+                function TTrecursiveshort(recursive) {
 
 
+                    var userIntent = 'the user intent';
+                    var rightSide = 'the right side';
+                    var leftSide = 'the left side';
+                    var because = 'because';
+                    var therefore = 'therefore,';
+                    var leftEmpty = 'the left side is empty';
+                    var rightEmpty = 'the right side is empty';
+                    var user = 'the user';
+
+                    if ("undefined" !== typeof $("input[name$='stars']") && $("input[name$='stars']").length > 0) {
                         var TTStarArray = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
 
                         $.each(TTStarArray, function(i, v) {
@@ -445,70 +455,71 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                             val = val.replace('/' + v + 'r', TTGetRecordsWithStar(v, 'right'));
                             val = val.replace('/' + v + 'a', TTGetRecordsWithStar(v, 'all'));
                         });
-
-                        if ("undefined" !== typeof TTshorties) {
-                            $.each(TTshorties, function() {
-
-                                val = val.replace(this.ShortCode, this.Value);
-
-                            });
-
-                        }
-
-                        val = val.replace('/q', query);
-                        val = val.replace('/s', side);
-                        val = val.replace('/us', user);
-                        val = val.replace('/ui', userIntent);
-                        val = val.replace('/ls', leftSide);
-                        val = val.replace('/rs', rightSide);
-                        val = val.replace('/b', because);
-                        val = val.replace('/t', therefore);
-                        val = val.replace('/le', leftEmpty);
-                        val = val.replace('/re', rightEmpty);
                     }
 
+                    if ("undefined" !== typeof TTshorties) {
+                        $.each(TTshorties, function() {
 
-                    TTrecursiveshort(false);
-                    var recursivei = 0;
-                    while (recursivei < 5) {
-                        if ($(this).val().indexOf('/') !== -1) {
-                            TTrecursiveshort(true);
-                        }
-                        recursivei++;
+                            val = val.replace(this.ShortCode, this.Value);
+
+                        });
+
                     }
 
-                    function capitalizeSentences(capText) {
-
-
-                        var wordSplit = '. ';
-
-                        var wordArray = capText.split(wordSplit);
-
-                        var numWords = wordArray.length;
-
-                        for (x = 0; x < numWords; x++) {
-                            wordArray[x] = wordArray[x].replace(wordArray[x].charAt(0), wordArray[x].charAt(0).toUpperCase());
-                            if (x == 0) {
-                                capText = wordArray[x] + ". ";
-                            } else if (x != numWords - 1) {
-                                capText = capText + wordArray[x] + ". ";
-                            } else if (x == numWords - 1) {
-                                capText = capText + wordArray[x];
-                            }
-                        }
-
-                        return capText;
-                    }
-                    if (val.indexOf('.') !== -1) {
-                        val = capitalizeSentences(val);
-                    }
-                    val = val.charAt(0).toUpperCase() + val.slice(1);
-                    $(this).val(val);
+                    val = val.replace('/q', query);
+                    val = val.replace('/s', side);
+                    val = val.replace('/us', user);
+                    val = val.replace('/ui', userIntent);
+                    val = val.replace('/ls', leftSide);
+                    val = val.replace('/rs', rightSide);
+                    val = val.replace('/b', because);
+                    val = val.replace('/t', therefore);
+                    val = val.replace('/le', leftEmpty);
+                    val = val.replace('/re', rightEmpty);
                 }
 
-            });
-				
-        }
+
+                TTrecursiveshort(false);
+                var recursivei = 0;
+                while (recursivei < 5) {
+                    if ($(this).val().indexOf('/') !== -1) {
+                        TTrecursiveshort(true);
+                    }
+                    recursivei++;
+                }
+
+                function capitalizeSentences(capText) {
+
+
+                    var wordSplit = '. ';
+
+                    var wordArray = capText.split(wordSplit);
+
+                    var numWords = wordArray.length;
+
+                    for (x = 0; x < numWords; x++) {
+                        wordArray[x] = wordArray[x].replace(wordArray[x].charAt(0), wordArray[x].charAt(0).toUpperCase());
+                        if (x == 0) {
+                            capText = wordArray[x] + ". ";
+                        } else if (x != numWords - 1) {
+                            capText = capText + wordArray[x] + ". ";
+                        } else if (x == numWords - 1) {
+                            capText = capText + wordArray[x];
+                        }
+                    }
+
+                    return capText;
+                }
+                if (val.indexOf('.') !== -1) {
+                    val = capitalizeSentences(val);
+                }
+                val = val.charAt(0).toUpperCase() + val.slice(1);
+                $(this).val(val);
+            }
+
+        });
+
+
 
         function TTsettings() {
             if (0 == $("#TTmodal").length) {
@@ -516,7 +527,7 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                     rel: "stylesheet",
                     type: "text/css",
                     href: "https://www.tickytimer.com/css/m11.css"
-                }).appendTo("head"), $(".container").append('<div id="TTmodal" class="modal"><div class="TTmodal-content"><span class="TTclose">&times;</span><div style="width:100%"><div class="TTclose"></div><h4>When To Click</h4><p>Click the bookmarklet on the task page to get to the list of tasks per button (task mapper). Click it each task to start a timer. After a timer has started, click again if you want to scroll past the instructions. Click on any other page and it will open the page quality assistant for that domain.</p><h4>Recent Changes</h4><p>Open in new tab has been added as an option</p><h4>Known Issues</h4><p>Before sending data to TickyTimer, TickyTimer validates the page by checking the error list (located on the top of each task if submitted incorrectly). There are a few types of tasks that do not have this section (some headphone tasks and Youtube Search Suggestion Tasks). TickyTimer will submit the data, but will do so even if there were errors on the task for these particular tasks. When you submit again after fixing your errors you will see a TickyTimer has already submitted the task message. Be mindful that the time it took to correct the issues was not recorded and should be added to your timecard. This happens only on a small set of task types.</p><h4>Scroll Amount (Percentage) - CTRL + Up Arrow | CTRL + Down Arrow</h4><p>Enter a number beteen 1 and 100. If you enter 100 and click on go up, it will go up 100% of the window height. If you enter 50 and hit go down, you will scroll down 50% of the window height. You can technically put a number over 100. It will scroll more than the window height.</p><input style="width:100%" onchange="TTScrollAmt(this)" type="number"  value="100" id="TTScrollAmt"><h4>Custom Shortcodes Import - <a href="javascript:void(0)" onclick="localStorage.removeItem(\'TTShorties\'); alert(\'Deletion was a success. Please refresh or wait until next task for changes to take place.\');">Click Here to Clear All Custom ShortCodes</a></h4><p>To add custom shortcodes please follow the instuctions <a target="_blank" href="https://www.tickytimer.com/custom-short-codes.php">here</a>. To delete custom shortcodes hit the link above. To edit custom shortcodes, recreate a file using the instuctions on the custom shortcodes page.</p><input type="file" class="file-to-import"><p><label><input id="TTDS" onclick="TTDS(this)" type="checkbox">Disable Shortcodes</label></p><h4>Green To Red Toolbar</h4><input onclick="TTGTR()" type="checkbox" id="TTGTR"><p>This setting changes the background color of the toolbar from green to red depending on how much time is left on the task. It starts off as green and gradually becomes red. </p><h4>Open Timer in Tab</h4><input onclick="TTTab()" type="checkbox" id="TTTab"><p>Opens the timer in a new tab instead of a window. <b>Note:</b> Chrome will focus on the new tab everytime a new task is started. This is a browser restriction and cannot be altered. Another option is just have the bookmarklet open in a new window, right click the window, and hit open as tab. This should not focus each time this way.</p><h4>Toolbar Color</h4><input onchange="colorMe()" style="margin-left:5px; margin-right:5px;" onchange="colorMe()"  type="color" id="TickyTimerColor"  value="#efefef" /> <h4>Links </h4><button style="margin-left:5px; margin-right:5px;" type="button" onClick="dashIt()">Dashboard</button><button style="margin-left:5px; margin-right:5px;" type="button" onClick="TTToggle();">Toggle Links</button><p>Notification sounds have been added to the bookmarklet. To mute sounds coming from TickyTimer.com, go to any page on tickytimer.com, right click the tab, and hit mute site.</p><h4>Notification Sound</h4><input id="TTSoundURL" onchange="TTChangeSound(this)" style="width:100%"><h4>Sound Notification Timer</h4><p>At what time left should the notification play? Enter time as m:ss. If you do not want notification sounds set this to 99:99. </p><input onchange="TTChangeSoundTracker(this)" id="TTSoundTracker" style="width:100%"><h4>Sound Exceptions</h4><p>Enter an amount of seconds in which the sound should not play. Ex entering 30 will prevent sound notifications on tasks that are 30 seconds or less.<input  onchange="TTChangeSoundException(this)" id="TTSoundException" style="width:100%"></p><p><a  target="blank" href="https://www.facebook.com/groups/2051461215176210/">RaterMate (Alternative Timer)</a></p><p><a  target="blank" href="http://ss13.moe/usrlocs/">Chris\'s Bookmarklet (Alternative Timer)</a></p></div></div></div>');
+                }).appendTo("head"), $(".container").append('<div id="TTmodal" class="modal"><div class="TTmodal-content"><span class="TTclose">&times;</span><div style="width:100%"><div class="TTclose"></div><h4>When To Click</h4><p>Click the bookmarklet on the task page to get to the list of tasks per button (task mapper). Click it each task to start a timer. After a timer has started, click again if you want to scroll past the instructions. Click on any other page and it will open the page quality assistant for that domain.</p><h4>Known Issues</h4><p>Before sending data to TickyTimer, TickyTimer validates the page by checking the error list (located on the top of each task if submitted incorrectly). There are a few types of tasks that do not have this section (some headphone tasks and Youtube Search Suggestion Tasks). TickyTimer will submit the data, but will do so even if there were errors on the task for these particular tasks. When you submit again after fixing your errors you will see a TickyTimer has already submitted the task message. Be mindful that the time it took to correct the issues was not recorded and should be added to your timecard. This happens only on a small set of task types.</p><h4>Scroll Amount (Percentage) - CTRL + Up Arrow | CTRL + Down Arrow</h4><p>Enter a number beteen 1 and 100. If you enter 100 and click on go up, it will go up 100% of the window height. If you enter 50 and hit go down, you will scroll down 50% of the window height. You can technically put a number over 100. It will scroll more than the window height.</p><input style="width:100%" onchange="TTScrollAmt(this)" type="number"  value="100" id="TTScrollAmt"><h4>Custom Shortcodes Import </h4><p><a href="javascript:void(0)" onclick="localStorage.removeItem(\'TTShorties\'); alert(\'Deletion was a success. Please refresh or wait until next task for changes to take place.\');">Click Here to Clear All Custom ShortCodes</a><br>To add custom shortcodes please follow the instuctions <a target="_blank" href="https://www.tickytimer.com/custom-short-codes.php">here</a>. To delete custom shortcodes hit the link above. To edit custom shortcodes, recreate a file using the instuctions on the custom shortcodes page.</p><input type="file" class="file-to-import"><p><label><input id="TTDS1" onclick="TTDS1(this)" type="checkbox">Enable Shortcodes</label></p><h4>Green To Red Toolbar</h4><input onclick="TTGTR()" type="checkbox" id="TTGTR"><p>This setting changes the background color of the toolbar from green to red depending on how much time is left on the task. It starts off as green and gradually becomes red. </p><h4>Open Timer in Tab</h4><input onclick="TTTab()" type="checkbox" id="TTTab"><p>Opens the timer in a new tab instead of a window. <b>Note:</b> Chrome will focus on the new tab everytime a new task is started. This is a browser restriction and cannot be altered. Another option is just have the bookmarklet open in a new window, right click the window, and hit open as tab. This should not focus each time this way.</p><h4>Toolbar Color</h4><input onchange="colorMe()" style="margin-left:5px; margin-right:5px;" onchange="colorMe()"  type="color" id="TickyTimerColor"  value="#efefef" /> <h4>Links </h4><button style="margin-left:5px; margin-right:5px;" type="button" onClick="dashIt()">Dashboard</button><button style="margin-left:5px; margin-right:5px;" type="button" onClick="TTToggle();">Toggle Links</button><p>Notification sounds have been added to the bookmarklet. To mute sounds coming from TickyTimer.com, go to any page on tickytimer.com, right click the tab, and hit mute site.</p><h4>Notification Sound</h4><input id="TTSoundURL" onchange="TTChangeSound(this)" style="width:100%"><h4>Sound Notification Timer</h4><p>At what time left should the notification play? Enter time as m:ss. If you do not want notification sounds set this to 99:99. </p><input onchange="TTChangeSoundTracker(this)" id="TTSoundTracker" style="width:100%"><h4>Sound Exceptions</h4><p>Enter an amount of seconds in which the sound should not play. Ex entering 30 will prevent sound notifications on tasks that are 30 seconds or less.<input  onchange="TTChangeSoundException(this)" id="TTSoundException" style="width:100%"></p><p><a  target="blank" href="https://www.facebook.com/groups/2051461215176210/">RaterMate (Alternative Timer)</a></p><p><a  target="blank" href="http://ss13.moe/usrlocs/">Chris\'s Bookmarklet (Alternative Timer)</a></p></div></div></div>');
                 var t = document.getElementById("TTmodal"),
                     e = document.getElementById("TTModalbtn"),
                     o = document.getElementsByClassName("TTclose")[0];
@@ -528,13 +539,13 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                     e.target == t && (t.style.display = "none")
                 }
             }
-			
-			var TTDS =  localStorage.getItem("TTDS");
-			var TTTab = localStorage.getItem("TTTab");
-			if(TTDS == "1"){
-				$('#TTDS')[0].checked = true;			
-			}
-			
+
+            var TTDS1 = localStorage.getItem("TTDS1");
+            var TTTab = localStorage.getItem("TTTab");
+            if (TTDS1 == "1") {
+                $('#TTDS1')[0].checked = true;
+            }
+
             if ("1" == localStorage.getItem("TTGTR") && $("#TTGTR").prop("checked", !0), null === localStorage.getItem("TTURL") || "" === localStorage.getItem("TTURL")) var i = "https://sfxcontent.s3.amazonaws.com/soundfx/CashRegister.mp3";
             else i = localStorage.getItem("TTURL");
             if ($("#TTSoundURL").val(i), window.TickySound = new Audio(i), null === localStorage.getItem("TTSoundTracker") || "" === localStorage.getItem("TTSoundTracker")) var a = "0:05";
@@ -548,48 +559,78 @@ if (-1 === TaskPage.indexOf("raterhub")) {
             } else {
                 $('#TTScrollAmt').val(100);
             }
-			if (null !== localStorage.getItem("TTTab")) {
-				var tttab = localStorage.getItem("TTTab");
-				if(tttab == 1){
-					$('#TTTab')[0].checked = true;
-				}
-				
-			}
+            if (null !== localStorage.getItem("TTTab")) {
+                var tttab = localStorage.getItem("TTTab");
+                if (tttab == 1) {
+                    $('#TTTab')[0].checked = true;
+                }
+
+            }
         }
 
         function autoSubmitTask() {
             $("#TickyTimerAS").prop("checked") ? localStorage.setItem("AS", "Yes") : localStorage.setItem("AS", "No")
         }
-        "Does this query seek Porn or Racy content?" == $("#ewok-buds-question-classification-0 h2").text() && ($(" <h2>TickyTimer - Racy Rater</h2>").insertBefore("#ewok-buds-question-classification-0 h2"), $(' <label><input class="TTRacy" onclick="TTRacy(0,this)" type="checkbox">Mark all as porn?</label>').insertAfter("#ewok-buds-question-classification-0 h2:eq(0)"), $(' <label><input class="TTRacy" onclick="TTRacy(1,this)" type="checkbox">Mark all as racy?</label>').insertAfter("#ewok-buds-question-classification-0 h2:eq(0)"), $(' <label><input class="TTRacy" onclick="TTRacy(2,this)" type="checkbox">Mark all as safe?</label>').insertAfter("#ewok-buds-question-classification-0 h2:eq(0)")), void 0 === Number.prototype.toRad && (Number.prototype.toRad = function() {
+        ("Does this query seek Porn or Racy content?" == $("#ewok-buds-question-classification-0 h2").text()) && ($(" <h2>TickyTimer - Racy Rater</h2>").insertBefore("#ewok-buds-question-classification-0 h2"), $(' <label><input class="TTRacy" onclick="TTRacy(0,this)" type="checkbox">Mark all as porn?</label>').insertAfter("#ewok-buds-question-classification-0 h2:eq(0)"), $(' <label><input class="TTRacy" onclick="TTRacy(1,this)" type="checkbox">Mark all as racy?</label>').insertAfter("#ewok-buds-question-classification-0 h2:eq(0)"), $(' <label><input class="TTRacy" onclick="TTRacy(2,this)" type="checkbox">Mark all as safe?</label>').insertAfter("#ewok-buds-question-classification-0 h2:eq(0)")), void 0 === Number.prototype.toRad && (Number.prototype.toRad = function() {
             return this * Math.PI / 180
         }), void 0 === Number.prototype.toDeg && (Number.prototype.toDeg = function() {
             return this * (180 / Math.PI)
         });
         var taskID = getUrlParameter("taskIds"),
             AETTime = parseFloat($(".ewok-estimated-task-weight").text().match(/[\d\.]+/));
-        isNaN(parseFloat(AETTime)) && (AETTime = $("h1:eq(3)").text().match(/[\d]+[\.][\d]+/)), $('input[name="nomoredupes"],input[name="nomoreporn"],input[name="confirmFlags.1"],input[name="left_missing_item"]:eq(1),input[name="right_missing_item"]:eq(1)').click();
+        isNaN(parseFloat(AETTime)) && (AETTime = $("h1:eq(3)").text().match(/[\d]+[\.][\d]+/)), $('input[name="nomoredupes"],input[name="ListenCondition"]:eq(0),input[name="nomoreporn"],input[name="confirmFlags.1"],input[name="left_missing_item"]:eq(1),input[name="right_missing_item"]:eq(1)').prop('checked', true);
+        $('#ListenCount,#right-listen-count,#left-listen-count').val(1);
         var taskName = $("h1:eq(1)").text(),
             left = window.screen.width - 285,
             top = window.screen.height - 450,
             AET = 60 * parseFloat(AETTime);
+        $('body').append('<input value="1" type="hidden" id="TTCanPlay">');
         if (AET = precisionRound(AET, 2), isNaN(AET) || (countdown(0, AET), $(document).on("submit", "form#ewok-task-form", function() {
+                if ($(".ewok-error-field").length > 0) {
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $(".ewok-error-field").eq(0).offset().top - 200
+                    }, 0);
+                }
                 0 == $(".ewok-error-field").length && (localStorage.getItem("LastTask") !== taskID ? messageTicky() : alert("Ticky Timer has already submitted this task."))
             })), "" !== $(".ewok-task-query:first").text()) var TTquery = $(".ewok-task-query:first").text();
         else TTquery = "";
         TTquery = TTquery.replace(/[^a-z0-9\s]/gi, "").replace(/[_\s]/g, "-");
-		
-		
-		
-		if(null === localStorage.getItem("TTTab") || 0 == localStorage.getItem("TTTab")){
-        var tickytimer = window.open("https://www.tickytimer.com/bookmarklet.php?Task=" + taskName + "&Time=" + AETTime + "&taskIds=" + taskID + "&q=" + encodeURIComponent(TTquery), "TickyTimer", "location=no,height=150,width=285,left=" + left + ",top=" + top + ",scrollbars=yes,toolbar=0,status=0,menubar=0,titlebar=0");
-		}else{
-		var tickytimer = window.open("https://www.tickytimer.com/bookmarklet-window.php?Task=" + taskName + "&Time=" + AETTime + "&taskIds=" + taskID + "&q=" + encodeURIComponent(TTquery), "_new");
-		tickytimer.blur();
-		window.focus();
-		}
-		
+
+
+
+        if (null === localStorage.getItem("TTTab") || 0 == localStorage.getItem("TTTab")) {
+            var tickytimer = window.open("https://www.tickytimer.com/bookmarklet.php?version=extension&Task=" + taskName + "&Time=" + AETTime + "&taskIds=" + taskID + "&q=" + encodeURIComponent(TTquery), "TickyTimer", "location=no,height=150,width=285,left=" + left + ",top=" + top + ",scrollbars=yes,toolbar=0,status=0,menubar=0,titlebar=0");
+        } else {
+            var tickytimer = window.open("https://www.tickytimer.com/bookmarklet-window.php?Task=" + taskName + "&Time=" + AETTime + "&taskIds=" + taskID + "&q=" + encodeURIComponent(TTquery), "_new");
+            tickytimer.blur();
+            window.focus();
+        }
+
         function messageTicky() {
             0 == $("#ewok-errors-list").find("li").length && (tickytimer.postMessage("stop", "*"), localStorage.setItem("LastTask", taskID))
+        }
+
+        function TTContinue() {
+            var timeLeft = $('#TickyTimerSpan').text();
+            var timeLeft = timeLeft.split(':');
+            var secondsLeft = parseInt(timeLeft[0]) * 60 + parseInt(timeLeft[1]);
+            countdown(0, secondsLeft);
+        }
+
+        function TTpause() {
+            var text = $('#TTPause').text();
+            if (text == 'Pause') {
+                $('#TTCanPlay').val('0');
+                tickytimer.postMessage("pause", "*");
+                $('#TTPause').text('Continue');
+            } else {
+                $('#TTCanPlay').val('1');
+                if ($('#TickyTimerSpan').text().indexOf('-') == -1) {
+                    TTContinue();
+                } else {}
+                tickytimer.postMessage("play", "*");
+                $('#TTPause').text('Pause');
+            }
         }
 
         if ($('.pq-task-main-info').length > 0) {
@@ -604,15 +645,109 @@ if (-1 === TaskPage.indexOf("raterhub")) {
             return "0" == o.substr(0, 1) && (o = "0" + o), t + ":" + o
         }
 
+        function TTValidateInput(val, max) {
+            if (isNaN(val)) {
+                return false;
+            }
+
+            if ("undefined" == typeof val) {
+                return false;
+            }
+
+            if (val.length == 0) {
+                return false;
+            }
+
+            if (val == 0) {
+                return false;
+            }
+
+
+            if (val % 0.5 !== 0) {
+                return false;
+            }
+
+            if (val <= max && val >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function tt1() {
+            $('input[type="radio"]:enabled').prop('checked', true);
+        }
+
+        function tt2() {
+            var response = prompt("Check the Nth radio button in each group. What is N?", "1");
+            if (TTValidateInput(response, 99)) {
+                response = response - 1;
+                var radioNames = [];
+                $('input[type="radio"]').each(function() {
+                    var radioN = $(this).attr('name');
+                    var inArr = radioNames.includes(radioN);
+                    var disabled = $(this).prop('disabled');
+                    if (!inArr && $(this).parents('.ewok-buds-score').length == 0 && !disabled) {
+                        radioNames.push(radioN);
+                    }
+
+                });
+
+                radioNames.forEach(function(item) {
+                    $('input[name="' + item + '"]:eq(' + response + ')').prop('checked', true);
+                });
+            }
+        }
+
+
+        function TTActions(fun) {
+            if (fun == "tt1") {
+                tt1();
+            } else if (fun == "tt2") {
+                tt2();
+            } else if (fun == "tt3") {
+                TTSearchQueryOnYoutube();
+            }
+        }
+
         function handleAutos() {
-         if ($("#TickyTimerAS").prop("checked")) {
+            if ($("#TickyTimerAS").prop("checked")) {
                 var x = $('#ttaselect').val();
-				if(x == "1"){
-					$("#ewok-task-submit-button").click();
-				}else if(x == "2"){
-					$("#ewok-task-submit-done-button").focus().click();
-				}
-				
+                if (x == "1") {
+                    $("#ewok-task-submit-button").click();
+                } else if (x == "2") {
+                    $("#ewok-task-submit-done-button").focus().click();
+                }
+
+            }
+        }
+
+        function TTcountUp() {
+            var currentTime = $('#TickyTimerSpan').text();
+            currentTime = currentTime.replace('-', '');
+            var time = currentTime.split(':');
+            var minutesLabel = time[0];
+            var secondsLabel = time[1];
+            var totalSeconds = 0;
+
+            setInterval(setTime, 1000);
+
+            function setTime() {
+                if ($('#TTCanPlay').val() == 1) {
+                    ++totalSeconds;
+                    //secondsLabel.innerHTML = pad(totalSeconds % 60);
+                    // minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+                    $('#TickyTimerSpan').text('-' + pad(parseInt(totalSeconds / 60)) + ':' + pad(totalSeconds % 60));
+                }
+            }
+
+            function pad(val) {
+                var valString = val + "";
+                if (valString.length < 2) {
+                    return "0" + valString;
+                } else {
+                    return valString;
+                }
             }
         }
 
@@ -631,23 +766,31 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                     return t.length < 2 ? "0" + t : t
                 }
                 setInterval(function() {
-                    ++t;
-                    var e = "-" + parseInt(t / 60) + ":" + o(t % 60);
-                    parseInt(t), parseInt(AET);
-                    $("#TickyTimerSpan").text("-" + parseInt(t / 60) + ":" + o(t % 60)), document.title = "(" + e + ") - TickyTimer"
-                }, 1e3)
+                    if ($('#TTCanPlay').val() == 1) {
+
+                        ++t;
+                        var e = "-" + parseInt(t / 60) + ":" + o(t % 60);
+                        parseInt(t), parseInt(AET);
+                        $("#TickyTimerSpan").text("-" + parseInt(t / 60) + ":" + o(t % 60)), document.title = "(" + e + ") - TickyTimer";
+                    }
+                }, 1e3);
+
             }
             i = +new Date + 1e3 * (60 * e + t) + 500,
                 function e() {
-                    if ($("#TTGTR").prop("checked")) {
-                        var t = TTgetColor(1 - parseInt(s / 1e3) / parseInt(AET));
-                        $("#ewok-submit-div").css("background-color", t)
-                    }
-                    if ($("#TickyTimerSpan").text() == $("#TTSoundTracker").val() && AET > $("#TTSoundException").val() && TickySound.play(), (s = i - +new Date) < 1e3) document.title = "0:00 (" + c + ")- TickyTimer", $("#TickyTimerSpan").text("0:00"), clearTimeout(e), d(), handleAutos();
-                    else {
-                        r = new Date(s), a = r.getUTCHours(), n = r.getUTCMinutes(), document.title = (a ? a + ":" + l(n) : n) + ":" + l(r.getUTCSeconds()) + " (" + c + ") - TickyTimer";
-                        var o = (a ? a + ":" + l(n) : n) + ":" + l(r.getUTCSeconds());
-                        $("#TickyTimerSpan").text(o), "0:00" == o ? (clearTimeout(e), d()) : setTimeout(e, r.getUTCMilliseconds() + 500)
+                    if ($('#TTCanPlay').val() == 1) {
+
+                        if ($("#TTGTR").prop("checked")) {
+                            var t = TTgetColor(1 - parseInt(s / 1e3) / parseInt(AET));
+                            $("#ewok-submit-div").css("background-color", t)
+                        }
+                        if ($("#TickyTimerSpan").text() == $("#TTSoundTracker").val() && AET > $("#TTSoundException").val() && TickySound.play(), (s = i - +new Date) < 1e3) document.title = "0:00 (" + c + ")- TickyTimer", $("#TickyTimerSpan").text("0:00"), clearTimeout(e), d(), handleAutos();
+                        else {
+                            r = new Date(s), a = r.getUTCHours(), n = r.getUTCMinutes(), document.title = (a ? a + ":" + l(n) : n) + ":" + l(r.getUTCSeconds()) + " (" + c + ") - TickyTimer";
+                            var o = (a ? a + ":" + l(n) : n) + ":" + l(r.getUTCSeconds());
+                            $("#TickyTimerSpan").text(o), "0:00" == o ? (clearTimeout(e), d()) : setTimeout(e, r.getUTCMilliseconds() + 500)
+                        }
+
                     }
                 }()
         }
@@ -667,7 +810,8 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                     }
                 }
             }),
-            $("#ewok-submit-div").css("position", "fixed"), $("#ewok-submit-div").css("bottom", 0), $("#ewok-submit-div").css("background-color", "#efefef"), $(".clear:last").css("height", "100px"), $("#ewok-submit-div").css("z-index", 99), $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="TTgoDown()">&#9660;</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="TTgoUp()">&#9650;</button>').insertAfter("#ewok-task-submit-done-button"), $('<span style="font-size:15px; background-color:rgb(239, 239, 239); color:#222; padding:5px; margin-left:5px; margin-right:5px;" ><label style="margin-left:5px; margin-right:3px;"><select id="ttaselect" onchange="$(\'#TickyTimerAS\').prop(\'checked\',true)"><option value="1">Auto Submit</option><option value="2">Auto SASR</option></select><input onClick="autoSubmitTask()"   type="checkbox" id="TickyTimerAS"/></label> <span id="TickyTimerSpan"></span></span>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" type="button" onClick="TTGuidelines()">Guidelines</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" type="button" onClick="tickyTimerRelease()">Release</button>').insertAfter("#ewok-task-submit-done-button"), $(".ewok-task-query:first").text(), "" !== $(".ewok-task-query:first").text() && $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="googleIt()">Google</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" id="TTModalbtn" type="button" onClick="TTsettings()">Settings</button>').insertAfter("#ewok-task-submit-done-button"), $("#ewok-submit-div").css("min-width", "0px"), $("#ewok-task-cancel-button").css("margin-left", "10px"), TTsettings();
+
+            $("#ewok-submit-div").css("position", "fixed"), $("#ewok-submit-div").css("bottom", 0), $("#ewok-submit-div").css("background-color", "#efefef"), $(".clear:last").css("height", "100px"), $("#ewok-submit-div").css("z-index", 99), $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="TTgoDown()">&#9660;</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="TTgoUp()">&#9650;</button>').insertAfter("#ewok-task-submit-done-button"), $('<span style="font-size:15px; background-color:rgb(239, 239, 239); color:#222; padding:5px; margin-left:5px; margin-right:5px;" ><label style="margin-left:5px; margin-right:3px;"><select id="ttaselect" onchange="$(\'#TickyTimerAS\').prop(\'checked\',true)"><option value="1">Auto Submit</option><option value="2">Auto SASR</option></select><input onClick="autoSubmitTask()"   type="checkbox" id="TickyTimerAS"/></label> <span id="TickyTimerSpan"></span></span>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" type="button" onClick="TTGuidelines()">Guidelines</button>').insertAfter("#ewok-task-submit-done-button"), $('<select style="color:#565656; font-weight:bold; width:80px; margin-left:5px; margin-right:5px; background-color:#f5f5f5; line-height: 17px; padding: 4px 10px 4px 7px; border: 1px solid #dedede; margin-top: auto; margin-bottom: auto;" onchange="TTActions(this.value)"><option>Actions</option><option value="tt1">Check Last Radio Box of Each Group</option><option value="tt2">Check Nth Radio Button of Each Group</option><option value="tt3">Youtube Search Query</option></select>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" type="button" onClick="tickyTimerRelease()">Release</button>').insertAfter("#ewok-task-submit-done-button"), $(".ewok-task-query:first").text(), "" !== $(".ewok-task-query:first").text() && $('<button style="margin-left:5px; margin-right:5px;"  type="button" onClick="googleIt()">Google</button>').insertAfter("#ewok-task-submit-done-button"), $('<button style="margin-left:5px; margin-right:5px;" id="TTPause" type="button" onClick="TTpause()">Pause</button>').insertAfter("#ewok-task-submit-done-button"), $('<button  margin-left:5px; margin-right:5px;" id="TTModalbtn" type="button" onClick="TTsettings()">Settings</button>').insertAfter("#ewok-task-submit-done-button"), $("#ewok-submit-div").css("min-width", "0px"), $("#ewok-task-cancel-button").css("margin-left", "10px"), TTsettings();
         var s = document.createElement("script");
         if (s.type = "text/javascript", s.src = "https://www.tickytimer.com/node_modules/hacktimer/HackTimer.min.js", $("head").append(s), null === localStorage.getItem("AS") && localStorage.setItem("AS", "No"), "Yes" === localStorage.getItem("AS") && $("#TickyTimerAS").prop("checked", !0), null === localStorage.getItem("color") && localStorage.setItem("color", "#efefef"), $("#TickyTimerColor").val(localStorage.getItem("color")), colorMe(), grapher(), $("body").on("keydown", function(e) {
                 if ($("#TickyTimerAS").prop("checked")) var t = !0;
@@ -676,7 +820,7 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                     $("#TickyTimerAS").prop("checked", !0)
                 }, 1500)
             }), "undefined" != typeof buds && -1 !== $(".ewok-task-query:first").text()) {
-            if (typeof buds.proto_.map !== "undefined") {
+            if (typeof buds.proto_.map !== "undefined" && "undefined" !== buds.proto_.map.location && "undefined" !== typeof buds.proto_.map.location.politicalEntity) {
                 if (void 0 !== buds.proto_.map.location.politicalEntity.centerList[0]) var cord = buds.proto_.map.location.politicalEntity.centerList[0] + "," + buds.proto_.map.location.politicalEntity.centerList[1];
                 else cord = void 0 !== buds.proto_.map.location.politicalEntity.bounds.hiList ? buds.proto_.map.location.politicalEntity.bounds.hiList[0] + "," + buds.proto_.map.location.politicalEntity.bounds.hiList[1] : buds.proto_.map.location.politicalEntity.name;
                 var TTLocation = buds.proto_.map.location.politicalEntity.name,
@@ -686,6 +830,7 @@ if (-1 === TaskPage.indexOf("raterhub")) {
                 $("#ewok-buds-query").find('div:contains("User")').html("<div class='tickylinks'>TickyTimer User Location - <span id='TTUserLocation'>" + TTLocation + '</span><br><a class="tickylinks" href="https://www.google.com/maps/search/' + TTLQuery + "/@" + cord + ',14z" target="_blank">Search Query on Maps</a> <span class="divider">|</span> </div>');
             }
         }
+        $('.ewok-buds-result-visited-input').val("true");
 
     } else scrollToTask()
 }
